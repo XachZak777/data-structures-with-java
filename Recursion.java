@@ -1,5 +1,6 @@
 public class Recursion {
 
+    //* Recursive Factorial */
     public static int factorial (int n) throws IllegalArgumentException {
         if (n < 0) 
             throw new IllegalArgumentException(); // Must be Non-negative
@@ -9,6 +10,7 @@ public class Recursion {
             return n * factorial (n-1); // Recursive Call
     }
 
+    //* Recursive Binary Search Algorithm */
     public static boolean binarySearch (int[] data, int target, int low, int high) {
         if (low > high) // Empty interval
             return false;
@@ -23,6 +25,7 @@ public class Recursion {
         }
     }
 
+    //* Recursive English Ruler */
     public static void drawRuler (int nInches, int majorLenght) {
         drawLine(majorLenght, 0);
         for (int j = 0; j <= nInches; j++) {
@@ -31,6 +34,7 @@ public class Recursion {
         }
     }
 
+    //* Helper for English Ruler */
     private static void drawInterval (int centralLenght) {
         if (centralLenght >= 1) {
             drawInterval(centralLenght - 1);
@@ -39,6 +43,7 @@ public class Recursion {
         }
     }
 
+    //* Helper for English Ruler */
     private static void drawLine (int tichLenght, int tickLabel) {
         for (int j = 0; j < tichLenght; j++) 
             System.out.print("-");
@@ -47,7 +52,8 @@ public class Recursion {
         System.out.print("\n");
     }
 
+    //* Helper for English Ruler */
     private static void drawLine (int tichLenght) {
-        drawLine(tichLenght, 1)
+        drawLine(tichLenght, 1);
     }
 }

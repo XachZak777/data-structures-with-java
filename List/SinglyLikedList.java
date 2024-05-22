@@ -1,6 +1,6 @@
 package List;
 
-public class SinglyLikedList<E> {
+public class SinglyLikedList<E> implements Cloneable{
 
     private static class Node <E> {
         
@@ -73,5 +73,44 @@ public class SinglyLikedList<E> {
         if (size == 0) 
             tail = null;
         return answer;
+    }
+
+    public boolean equals (Object o) {
+
+        if (o == null) return false;
+
+        if (getClass() != o.getClass()) return false;
+
+        SinglyLikedList other = (SinglyLikedList) o;
+
+        if (size != other.size) return false;
+
+        Node walkA = head;
+        Node walkB = other.head;
+
+        while (walkA != null) {
+            if (!walkA.getElement().equals(walkB.getElement())) return false;
+            walkA = walkA.getNext();
+            walkB = walkB.getNext();
+        }
+        return true;
+    }
+
+    public SinglyLikedList<E> clone () throws CloneNotSupportedException {
+        
+        SinglyLikedList<E> other = (SinglyLikedList<E>)super.clone();
+
+        if (size > 0) {
+            other.head = new Node<>(head.getElement(), null);
+            Node<E> walk = head.getNext();
+            Node<E> otherTail = other.head;
+            while (walk != null) {
+                Node<E> newest = new Node<>(walk.getElement(), null);
+                otherTail.setNext(newest);
+                otherTail = newest;
+                walk = walk.getNext();
+            }
+        }
+        return other;
     }
 }

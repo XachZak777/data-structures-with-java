@@ -1,10 +1,10 @@
 package Stack;
 
-import List.SinglyLikedList;
+import List.SinglyLinkedList;
 
 public class LinkedStack<E> implements Stack<E> {
 
-    private SinglyLikedList<E> list = new SinglyLikedList<>();
+    private SinglyLinkedList<E> list = new SinglyLinkedList<>();
 
     public LinkedStack () {}
 

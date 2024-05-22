@@ -1,3 +1,5 @@
+package General;
+
 public class Recursion {
 
     // Recursive Factorial (Efficiency O(n)) 

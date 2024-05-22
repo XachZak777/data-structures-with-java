@@ -1,5 +1,8 @@
+package EfficientSorting;
+
 import java.util.Arrays;
 
+// Running Time O(n log n)
 public class MergeSort {
 
     // Merge Sort algorithm implementation
@@ -15,7 +18,7 @@ public class MergeSort {
         int[] S2 = Arrays.copyOfRange(S, mid, n);
 
         // Conquer.
-        
+
         mergeSort(S1);
         mergeSort(S2);
 

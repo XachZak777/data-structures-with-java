@@ -1,4 +1,4 @@
-package Lists;
+package List;
 
 public class SinglyLikedList<E> {
 

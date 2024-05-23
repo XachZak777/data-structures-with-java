@@ -41,11 +41,74 @@ public class LinkedMergeSort<E> {
         return head;
     }
 
-    // public static void main(String[] args) {
-    //     LinkedMergeSort<String> list = new LinkedMergeSort<String>();
-    //     String[] a = {"A", "B", "C", "D", "E"};
-    //     arrayToList(a);
+    public static <T> Node<T>[] splitList(Node<T> head) {
+        if (head == null) return new Node[]{null, null};
+        
+        Node<T> oddHead = head;
+        Node<T> evenHead = head.next;
+        Node<T> odd = oddHead;
+        Node<T> even = evenHead;
+        
+        while (odd != null && even != null) {
+            if (odd.next != null) odd.next = odd.next.next;
+            if (even.next != null) even.next = even.next.next;
+            
+            odd = odd.next;
+            even = even.next;
+        }
+        
+        return new Node[]{oddHead, evenHead};
+    }
 
-    //     System.out.println(a);
-    // }
+    public static Node<Integer> mergeLists(Node<Integer> l1, Node<Integer> l2) {
+        if (l1 == null) return l2;
+        if (l2 == null) return l1;
+        
+        Node<Integer> mergedHead;
+        if (l1.getElement() < l2.getElement()) {
+            mergedHead = l1;
+            l1 = l1.next;
+        } else {
+            mergedHead = l2;
+            l2 = l2.next;
+        }
+        
+        Node<Integer> current = mergedHead;
+        while (l1 != null && l2 != null) {
+            if (l1.getElement() < l2.getElement()) {
+                current.next = l1;
+                l1 = l1.next;
+            } else {
+                current.next = l2;
+                l2 = l2.next;
+            }
+            current = current.next;
+        }
+        
+        if (l1 != null) {
+            current.next = l1;
+        } else {
+            current.next = l2;
+        }
+        
+        return mergedHead;
+    }
+
+    public static Node<Integer> mergeSort(Node<Integer> head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        
+        // Split the list into odd and even
+        Node<Integer>[] split = splitList(head);
+        Node<Integer> lodd = split[0];
+        Node<Integer> leven = split[1];
+        
+        // Recursively sort both halves
+        lodd = mergeSort(lodd);
+        leven = mergeSort(leven);
+        
+        // Merge the sorted halves
+        return mergeLists(lodd, leven);
+    }
 }

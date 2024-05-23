@@ -1,5 +1,8 @@
 package List;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class ArrayList<E> implements List<E> {
 
     public static final int CAPACITY = 16;
@@ -57,5 +60,30 @@ public class ArrayList<E> implements List<E> {
     protected void checkIndex(int i, int n) throws IndexOutOfBoundsException {
         if (i < 0 || i >= n)
             throw new IndexOutOfBoundsException("Illegal Index " + i);
+    }
+
+    private class ArrayIterator implements Iterator<E> {
+        
+        private int j = 0;
+        private boolean removable = false;
+
+        public boolean hasNext () { return j < size; }
+
+        public E next () throws NoSuchElementException {
+            if (j == size) throw new NoSuchElementException("No next element.");
+            removable = true;
+            return data[j++];
+        }
+
+        public void remove () throws IllegalStateException {
+            if (!removable) throw new IllegalStateException("Nothing to remove.");
+            ArrayList.this.remove(j-1);
+            j--;
+            removable = false;
+        }
+    }
+
+    public Iterator<E> iterator () {
+        return new ArrayIterator();
     }
 }

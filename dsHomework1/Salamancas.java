@@ -1,3 +1,5 @@
+package dsHomework1;
+
 import java.util.Scanner;
 
 public class Salamancas {

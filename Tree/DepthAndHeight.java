@@ -2,7 +2,7 @@ package Tree;
 
 import List.Position;
 
-public class DepthAndHeight {
+public class DepthAndHeight<E> {
     
     public int depth (Position<E> p) {
         if (isRoot(p))
